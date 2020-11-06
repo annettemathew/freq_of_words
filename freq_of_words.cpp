@@ -6,14 +6,28 @@
 
 using namespace std;
 
-string line = "the cat in the hat.";
-char separators[] = " ,\t\n;.";
-char* token, * next_token;
-
+string to_lower(string s) {
+    string ret_val;
+    string::iterator iter = s.begin(),
+        iter_end = s.end();
+    for (; iter_end != iter; ++iter) {
+        ret_val += tolower(*iter);
+    }
+    return ret_val;
+}
 int main(int argc, char** argv){
+    string line = "The cat in the hat.";
+
+    string sline = line;
+    string lower_case_str = to_lower(sline);
+
+    char separators[] = " ,\t\n;.";
+    char* token, * next_token;
+    
     // Table that keeps track of words vs. count of occurence
     map<string, int> m;
-    token = strtok_s((char*)(line.c_str()), separators, &next_token); 
+    token = strtok_s((char*)(lower_case_str.c_str()), separators, &next_token); 
+
     // Step 1: Break it up into tokens.
     while (token != NULL){
         if (token != NULL) {
